@@ -7,8 +7,8 @@ type Launch = {
   };
   links: {
     patch: {
-      small: string;
-      large: string;
+      small: string | null;
+      large: string | null;
     };
     reddit: {
       campaign: unknown | null;

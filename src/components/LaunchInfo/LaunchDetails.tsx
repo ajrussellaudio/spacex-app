@@ -9,10 +9,10 @@ export function LaunchDetails({ name, date_utc, details, links, payloads, launch
   return (
     <>
       <Box>
-        <Grid container spacing={2}>
+        <Typography variant="h1">{name}</Typography>
+        <Grid container spacing={1}>
           <Grid item>
             <Box sx={{ width: "100%", maxWidth: 500 }}>
-              <Typography variant="h1">{name}</Typography>
               <Typography variant="subtitle2" gutterBottom>
                 {prettyDate(date_utc)}
               </Typography>
@@ -21,9 +21,7 @@ export function LaunchDetails({ name, date_utc, details, links, payloads, launch
               </Typography>
             </Box>
           </Grid>
-          <Grid item>
-            <img src={links.patch.small} alt={`Patch for ${name}`} />
-          </Grid>
+          <Grid item>{links.patch.small && <img src={links.patch.small} alt={`Patch for ${name}`} />}</Grid>
         </Grid>
         <Typography variant="h2" gutterBottom>
           Launchpad
