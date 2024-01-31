@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, gridDateComparator } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridEventListener, gridDateComparator } from "@mui/x-data-grid";
 import { useLaunches } from "../../hooks/useLaunches";
 import { Loading } from "../Loading";
 import { prettyDate } from "../../lib/prettyDate";
@@ -14,11 +14,19 @@ const columns: GridColDef<Launch>[] = [
   },
 ];
 
-export function Launches() {
+export type LaunchesProps = {
+  onSelect: (id: Launch["id"]) => void;
+};
+
+export function Launches({ onSelect }: LaunchesProps) {
   const { data, isLoading } = useLaunches();
 
   if (data && !isLoading) {
-    return <DataGrid rows={data} columns={columns} />;
+    const handleRowClick: GridEventListener<"rowClick"> = (params) => {
+      onSelect(params.row.id);
+    };
+
+    return <DataGrid rows={data} columns={columns} onRowClick={handleRowClick} />;
   }
 
   return <Loading />;
