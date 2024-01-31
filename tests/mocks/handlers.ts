@@ -2,6 +2,7 @@ import { HttpResponse, http } from "msw";
 import mockAllLaunchesJson from "./responses/all_launches.json";
 import mockOneLaunchJson from "./responses/one_launch.json";
 import mockOnePayloadJson from "./responses/one_payload.json";
+import mockOneLaunchpadJson from "./responses/one_launchpad.json";
 
 export const handlers = [
   http.get("https://api.spacexdata.com/v4/launches", () => {
@@ -16,6 +17,12 @@ export const handlers = [
   http.get("https://api.spacexdata.com/v4/payloads/:id", ({ params }) => {
     return HttpResponse.json({
       ...mockOnePayloadJson,
+      id: params.id,
+    });
+  }),
+  http.get("https://api.spacexdata.com/v4/launchpads/:id", ({ params }) => {
+    return HttpResponse.json({
+      ...mockOneLaunchpadJson,
       id: params.id,
     });
   }),
