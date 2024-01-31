@@ -3,6 +3,7 @@ import { Launches } from "./components/Launches";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import { LaunchInfo } from "./components/LaunchInfo";
+import { Instructions } from "./components/Instructions";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,7 @@ function App() {
           <Launches onSelect={setSelectedLaunchID} />
         </Grid>
         <Grid item xs={8}>
-          <LaunchInfo id={selectedLaunchID} />
+          {selectedLaunchID ? <LaunchInfo id={selectedLaunchID} /> : <Instructions />}
         </Grid>
       </Grid>
     </QueryClientProvider>

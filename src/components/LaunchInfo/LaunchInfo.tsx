@@ -1,10 +1,21 @@
-import { Instructions } from "./Instructions";
+import { useLaunch } from "../../hooks/useLaunch";
+import { Loading } from "../Loading";
 import { LaunchDetails } from "./LaunchDetails";
 
-type LaunchInfoProps = {
-  id?: Launch["id"];
+type LaunchDetailsProps = {
+  id: Launch["id"];
 };
 
-export function LaunchInfo({ id }: LaunchInfoProps) {
-  return id ? <LaunchDetails id={id} /> : <Instructions />;
+export function LaunchInfo({ id }: LaunchDetailsProps) {
+  const { data, isLoading } = useLaunch(id);
+
+  if (data && !isLoading) {
+    return (
+      <>
+        <LaunchDetails {...data} />
+      </>
+    );
+  }
+
+  return <Loading />;
 }
