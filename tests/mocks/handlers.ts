@@ -1,7 +1,8 @@
 import { HttpResponse, http } from "msw";
+import mockAllLaunchesJson from "./responses/all_launches.json";
 
 export const handlers = [
-  http.get("/hello", () => {
-    return HttpResponse.json({ message: "Hello, world!" });
+  http.get("https://api.spacexdata.com/v4/launches", () => {
+    return HttpResponse.json(mockAllLaunchesJson);
   }),
 ];
